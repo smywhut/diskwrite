@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "diskPath": "\\\\.\\PhysicalDrive3",
+  "sectorSize": 512,
+  "sgdiskPath": ".\\tools\\gdisk-windows-1.0.10\\sgdisk.exe",
+  "wipeBeforePartition": true,
+  "partitions": [
+    {
+      "number": 1,
+      "name": "boot_raw",
+      "startSector": 2048,
+      "sizeSectors": 262144,
+      "typeGuid": "EF00",
+      "payload": {
+        "mode": "auto",
+        "sourcePath": ".\\images\\boot.img",
+        "targetOffsetSectors": 0
+      },
+      "extra": {
+        "description": "无 filesystem 参数 -> 自动走 raw 直写"
+      }
+    },
+    {
+      "number": 2,
+      "name": "data_fs",
+      "startSector": 264192,
+      "sizeSectors": 2097152,
+      "typeGuid": "0700",
+      "filesystem": {
+        "type": "NTFS",
+        "label": "DATA",
+        "quick": true
+      },
+      "payload": {
+        "mode": "auto",
+        "sourcePath": ".\\payload\\data_files"
+      },
+      "extra": {
+        "description": "有 filesystem 参数 -> 自动格式化并拷贝文件"
+      }
+    }
+  ]
+}
